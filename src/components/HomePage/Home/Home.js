@@ -1,6 +1,7 @@
 import React from 'react';
 import AboutUs from '../AboutUs/AboutUs';
 import Address from '../Address/Address';
+import ChoseUs from '../Chose/ChoseUs';
 import PopularProduct from '../PopularProduct/PopularProduct';
 import Services from '../Services/Services';
 import Slider from '../Slider/Slider';
@@ -15,6 +16,7 @@ const Home = () => {
             <Address></Address>
             <PopularProduct></PopularProduct>
             <TeamMember></TeamMember>
+            <ChoseUs></ChoseUs>
         </div>
     );
 };

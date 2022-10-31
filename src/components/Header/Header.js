@@ -60,7 +60,7 @@ const Header = () => {
                         >
                             <ul className="items-center justify-center space-y-8 md:flex md:space-x-6 md:space-y-0">
                                 <li className="text-black hover:text-[#FF3811]">
-                                    <Link >Home</Link>
+                                    <Link to='/'>Home</Link>
                                 </li>
                                 <li className="text-black hover:text-[#FF3811]">
                                     <Link >About</Link>
@@ -73,6 +73,9 @@ const Header = () => {
                                 </li>
                                 <li className="text-black hover:text-[#FF3811]">
                                     <Link >Contact</Link>
+                                </li>
+                                <li className="text-black hover:text-[#FF3811]">
+                                    <Link to='/register' >Register</Link>
                                 </li>
                             </ul>
 
