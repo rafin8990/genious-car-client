@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useState } from "react";
 import { Link } from 'react-router-dom';
 import logo from '../../assets/logo.svg'
 import { FaSearch, FaShoppingBag } from "react-icons/fa";
+import { AuthContext } from '../../Context/AuthProvider/AuthProvider';
 
 const Header = () => {
+    const { user, logOut } = useContext(AuthContext);
     const [navbar, setNavbar] = useState(false);
     return (
         <div>
@@ -62,9 +64,15 @@ const Header = () => {
                                 <li className="text-black hover:text-[#FF3811]">
                                     <Link to='/'>Home</Link>
                                 </li>
-                                <li className="text-black hover:text-[#FF3811]">
-                                    <Link >About</Link>
+                                {
+                                 user?.uid ? 
+                                 <li className="text-black hover:text-[#FF3811]">
+                                    <Link to='/orders' >Orders</Link>
                                 </li>
+                                 :
+                                 <>
+                                 </>
+                                }
                                 <li className="text-black hover:text-[#FF3811]">
                                     <Link >Service</Link>
                                 </li>
@@ -74,9 +82,24 @@ const Header = () => {
                                 <li className="text-black hover:text-[#FF3811]">
                                     <Link >Contact</Link>
                                 </li>
-                                <li className="text-black hover:text-[#FF3811]">
-                                    <Link to='/register' >Register</Link>
-                                </li>
+                                {
+                                    user?.uid ?
+                                        <button onClick={logOut}
+                                            className="px-4 py-2 m-2 text-gray-800 bg-white rounded-md shadow hover:bg-gray-300"
+                                        >
+                                            Sign Out
+                                        </button>
+                                        :
+                                        <div className='flex '>
+                                            <li className="text-black hover:text-[#FF3811]">
+                                                <Link to='/register' >Register</Link>
+                                            </li>
+                                            <li className="text-black ml-5 hover:text-[#FF3811]">
+                                                <Link to='/login' >Sign In</Link>
+                                            </li>
+
+                                        </div>
+                                }
                             </ul>
 
                             <div className="mt-3 space-y-2 lg:hidden md:hidden">

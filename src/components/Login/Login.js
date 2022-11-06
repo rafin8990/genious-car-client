@@ -1,26 +1,42 @@
-import React from 'react';
-import login from '../../assets/images/login/login.svg'
+import React, { useContext } from 'react';
+import signin from '../../assets/images/login/login.svg'
 import google from '../../assets/images/social/Google_Icons-09-512.webp'
 import facebook from '../../assets/images/social/facebook_circle_color-512.webp'
 import linked from '../../assets/images/social/145807.png'
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../../Context/AuthProvider/AuthProvider';
 
 const Login = () => {
+    const {login}=useContext(AuthContext);
+
+    const handleLogIn=(event)=>{
+        event.preventDefault();
+        const form=event.target;
+        const email=form.email.value;
+        const password=form.password.value;
+        login(email,password)
+        .then(result=>{
+            const user= result.user;
+            console.log(user);
+            form.reset()
+        })
+        .catch(error=>console.error(error))
+    }
     return (
         <div className='mx-10 my-5  grid grid-cols-1 md:grid-cols-2 gap-5'>
             <div>
-                <img src={login} alt="" />
+                <img src={signin} alt="" />
             </div>
             <div className=''>
-                <form className=' border border-gray-300 p-10 rounded-md'>
+                <form onSubmit={handleLogIn} className=' border border-gray-300 p-10 rounded-md'>
                     <h1 className='text-4xl text-gray-600 mb-10 flex justify-center'>Sign Up</h1>
                     <div className=' form-control lg:m-10'>
                         <label className='Font-semibold mb-3 mt-3' htmlFor="name">Email :</label>
-                        <input placeholder='Enter Email ' className='border border-gray-400 py-3 rounded-md text-xl' type="Email" required />
+                        <input placeholder='Enter Email' name='email' className='border border-gray-400 py-3 rounded-md text-xl' type="Email" required />
                     </div>
                     <div className=' form-control lg:m-10'>
                         <label className='Font-semibold mb-3 mt-3' htmlFor="name">Password :</label>
-                        <input placeholder='Confirm Password' className='border border-gray-400 py-3 rounded-md text-xl' type="password" required />
+                        <input placeholder='Enter Password' name='password' className='border border-gray-400 py-3 rounded-md text-xl' type="password" required />
                     </div>
                     <div className=' form-control mt-3 lg:m-10'>
                         <button className='pl-5 pr-5 py-2 btn bg-[#FF3811] border-0'>Sign Up</button>
