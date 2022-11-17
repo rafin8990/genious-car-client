@@ -1,4 +1,5 @@
 import { createBrowserRouter } from "react-router-dom";
+import PrivateRoute from "../../PrivateRoute/PrivateRoute";
 import Register from "../../RegisterPage/Register";
 import Checkout from "../Checkout/Checkout";
 import Home from "../HomePage/Home/Home";
@@ -25,7 +26,7 @@ const router =createBrowserRouter([
             },
             {
                 path: '/checkout/:id',
-                element:<Checkout></Checkout>,
+                element:<PrivateRoute><Checkout></Checkout></PrivateRoute>,
                 loader:({params})=>fetch(`http://localhost:5000/services/${params.id}`)
             },
             {

@@ -23,7 +23,7 @@ const ChoseUs = () => {
             </div>
 
             <div className='md:flex justify-around  my-20'>
-                <div className='p-10 mt-5'>
+                <div className='p-10 bg-[#FF3811] rounded-md shadow-lg mt-5'>
                     <img src={pic1} alt="" />
                     <div>
                         <p>Time Delivery</p>

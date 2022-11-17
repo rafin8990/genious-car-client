@@ -3,24 +3,30 @@ import signin from '../../assets/images/login/login.svg'
 import google from '../../assets/images/social/Google_Icons-09-512.webp'
 import facebook from '../../assets/images/social/facebook_circle_color-512.webp'
 import linked from '../../assets/images/social/145807.png'
-import { Link } from 'react-router-dom';
+import { Link, Navigate, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Context/AuthProvider/AuthProvider';
 
 const Login = () => {
-    const {login}=useContext(AuthContext);
+    const { login } = useContext(AuthContext);
 
-    const handleLogIn=(event)=>{
+    const nevigate = useNavigate();
+    const location = useLocation();
+
+    const from = location.state?.from.pathname || '/'
+
+    const handleLogIn = (event) => {
         event.preventDefault();
-        const form=event.target;
-        const email=form.email.value;
-        const password=form.password.value;
-        login(email,password)
-        .then(result=>{
-            const user= result.user;
-            console.log(user);
-            form.reset()
-        })
-        .catch(error=>console.error(error))
+        const form = event.target;
+        const email = form.email.value;
+        const password = form.password.value;
+        login(email, password)
+            .then(result => {
+                const user = result.user;
+                console.log(user);
+                form.reset()
+                nevigate(from, { replace: true })
+            })
+            .catch(error => console.error(error))
     }
     return (
         <div className='mx-10 my-5  grid grid-cols-1 md:grid-cols-2 gap-5'>
